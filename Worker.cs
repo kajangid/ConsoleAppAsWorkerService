@@ -29,17 +29,6 @@ public class Worker : BackgroundService
         while (!stoppingToken.IsCancellationRequested)
         {
             _logger.LogInformation("Service running at: {time}", DateTimeOffset.Now);
-
-            var path = Path.Combine("D:\\Projects\\VS22\\ConsoleApp\\ConsoleAppAsWorkerService", "file.txt");
-            if (!File.Exists(path))
-            {
-                var fs = File.Create(path);
-                fs.Close();
-
-            }
-            var content = await File.ReadAllTextAsync(path, stoppingToken);
-            content = content + Environment.NewLine + $"Service running at: {DateTimeOffset.Now} ::: {_runInterval}";
-            await File.WriteAllTextAsync(path, content, stoppingToken);
             await Task.Delay(TimeSpan.FromSeconds(_runInterval), stoppingToken);
         }
     }

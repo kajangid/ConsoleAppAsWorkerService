@@ -9,7 +9,7 @@ public class TimedHostedService : IHostedService, IDisposable
     private int _runInterval;
     private readonly ILogger<TimedHostedService> _logger;
     private readonly IServiceScopeFactory _serviceScopeFactory;
-    private Timer _timer = null!;
+    private Timer? _timer;
 
     public TimedHostedService(ILogger<TimedHostedService> logger, IServiceScopeFactory serviceScopeFactory)
     {
